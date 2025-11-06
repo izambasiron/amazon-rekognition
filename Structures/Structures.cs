@@ -143,4 +143,15 @@ namespace PH.Structures
         public IEnumerable<FaceMatch> facematches;
     }
 
+    [OSStructure(Description = "Provides information about a single type of inappropriate, unwanted, or offensive content found in an image.")]
+    public struct ModerationLabel
+    {
+        [OSStructureField(DataType = OSDataType.Text, Description = "The label name for the type of unsafe content detected in the image.")]
+        public string Name;
+        [OSStructureField(DataType = OSDataType.Decimal, Description = "Specifies the confidence that Amazon Rekognition has that the label has been correctly identified.")]
+        public float Confidence;
+        [OSStructureField(DataType = OSDataType.Text, Description = "The name for the parent label.")]
+        public string ParentName;
+    }
+
 }

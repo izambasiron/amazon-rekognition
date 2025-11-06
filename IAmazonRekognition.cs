@@ -20,5 +20,10 @@ namespace PH
         /// </summary>
         [OSAction(Description = "Detect and extract faces details from an image", ReturnName = "JSONResponse")]
         public string detectFaces_ext(Authenticationinfo authInfo, string bas64Image);
+        /// <summary>
+        /// Detect unsafe or inappropriate content in an image.
+        /// </summary>
+        [OSAction(Description = "Detect moderation labels (unsafe or inappropriate content) in an image", ReturnName = "JSONResponse")]
+        public string detectModerationLabels_ext(Authenticationinfo authInfo, string bas64Image, int minConfidence);
     }
 }

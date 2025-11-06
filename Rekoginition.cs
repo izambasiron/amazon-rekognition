@@ -85,5 +85,33 @@ namespace PH
             var result = System.Text.Json.JsonSerializer.Serialize(detectFacesResponse);
             return result;
         }
+
+
+        public string detectModerationLabels_ext(Authenticationinfo authInfo, string bas64Image, int minConfidence)
+        {
+            var result = DetectModerationLabels(authInfo, bas64Image, minConfidence);
+            return result.Result;
+        }
+
+        /// <summary>
+        /// Detect moderation labels (unsafe or inappropriate content) in an image.
+        /// </summary>
+        /// <param name="authInfo"></param>
+        /// <param name="bas64Image"></param>
+        /// <param name="minConfidence"></param>
+        private async Task<string> DetectModerationLabels(Authenticationinfo authInfo, string bas64Image, int minConfidence)
+        {
+            Amazon.Rekognition.Model.Image image = getImageFromBase64(bas64Image);
+            AmazonRekognitionClient _rekognitionClient = getClient(authInfo);
+            var detectModerationLabelsRequest = new DetectModerationLabelsRequest
+            {
+                Image = image,
+                MinConfidence = minConfidence
+            };
+
+            var detectModerationLabelsResponse = await _rekognitionClient.DetectModerationLabelsAsync(detectModerationLabelsRequest);
+            var result = System.Text.Json.JsonSerializer.Serialize(detectModerationLabelsResponse);
+            return result;
+        }
     }
 }
